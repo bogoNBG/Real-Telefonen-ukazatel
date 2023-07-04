@@ -52,9 +52,9 @@
             </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.Column="1" Grid.Row="2">
-            <TextBox Text="{Binding SelectedContact.Name,  UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsReadOnly="True" />
-            <TextBox Text="{Binding SelectedContact.Number,  UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" IsReadOnly="True" />
-            <TextBox Text="{Binding SelectedContact.Email, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Text="{Binding SelectedContact.Name, Mode=TwoWay}" IsReadOnly="True" />
+            <TextBox Text="{Binding SelectedContact.Number, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Text="{Binding SelectedContact.Email,Mode=OneWay}" IsReadOnly="True" />
         </StackPanel>
 
     </Grid>
