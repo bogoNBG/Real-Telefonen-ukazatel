@@ -1,0 +1,16 @@
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.csproj.AssemblyReference.cache
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.csproj.SuggestedBindingRedirects.cache
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\MainWindow.g.cs
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\App.g.cs
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl_MarkupCompile.cache
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl_MarkupCompile.lref
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\bin\Debug\VtoriDubyl.exe.config
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\bin\Debug\VtoriDubyl.exe
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\bin\Debug\VtoriDubyl.pdb
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\MainWindow.baml
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.g.resources
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.Properties.Resources.resources
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.csproj.GenerateResource.cache
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.csproj.CoreCompileInputs.cache
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.exe
+C:\Users\VSC2_\Documents\Bogomil\VtoriDubyl\VtoriDubyl\obj\Debug\VtoriDubyl.pdb
