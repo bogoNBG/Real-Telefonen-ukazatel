@@ -9,7 +9,7 @@ namespace WpfApp4.Model
     internal class Item
     {
         public string Name { get; set; }
-        public string SerialNumber { get; set; }
-        public int Quantity { get; set; }
+        public string Number { get; set; }
+        public string Email { get; set; }
     }
 }

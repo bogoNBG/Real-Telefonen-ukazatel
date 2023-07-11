@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WpfApp4",
+    "\\WpfApp4\\WpfApp4"
   ],
-  "SelectedNode": "\\Telefonen ukazater.sln",
+  "SelectedNode": "\\WpfApp4\\WpfApp4.sln",
   "PreviewInSolutionExplorer": false
 }
