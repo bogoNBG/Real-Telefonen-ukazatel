@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using WpfApp4.Model;
 using WpfApp4.MVVM;
 
@@ -8,13 +9,20 @@ namespace WpfApp4.ViewModel
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        public MainWindowViewModel()
+        {
+            Contacts = new ObservableCollection<Contact>();
+            ShownContacts = Contacts;
+            Options = new ObservableCollection<Option>();
+        }
         public ObservableCollection<Contact> Contacts { get; set; }
-        public ObservableCollection<string> Options { get; set; }
+        public ObservableCollection<Option> Options { get; set; }
 
         public RelayCommand AddContactCommand => new(execution => AddContact(), canExecute => CanAddContact());
         public RelayCommand RemoveContactCommand => new(execution => RemoveContact(), canExecute => CanRemoveContact());
         public RelayCommand AddOptionCommand => new(execution => AddOption(), canExecute => CanAddOption());
         public RelayCommand RemoveOptionCommand => new(execution => RemoveOption(), canExecute => CanRemoveOption());
+        public RelayCommand SearchCommand => new(execution => SearchContacts());
 
         private string name;
         public string Name
@@ -49,25 +57,40 @@ namespace WpfApp4.ViewModel
             }
         }
 
-        private string option;
-
-        public string Option
+        private string optionName;
+        public string OptionName
         {
-            get { return option; }
+            get { return optionName; }
             set 
             {
-                option = value;
+                optionName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string searchedContact;
+        public string SearchedContact
+        {
+            get { return searchedContact; }
+            set 
+            { 
+                searchedContact = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<Contact> shownContacts;
+        public ObservableCollection<Contact> ShownContacts
+        {
+            get { return shownContacts; }
+            set
+            {
+                shownContacts = value;
                 OnPropertyChanged();
             }
         }
 
 
-        public MainWindowViewModel()
-        {
-            Contacts = new ObservableCollection<Contact>();
-            Options = new ObservableCollection<string>();
-        }
-       
         private Contact? selectedContact;
         public Contact? SelectedContact
 		{
@@ -79,8 +102,8 @@ namespace WpfApp4.ViewModel
             }
 		}
 
-        private string selectedOption;
-        public string SelectedOption
+        private Option selectedOption;
+        public Option SelectedOption
         {
             get { return selectedOption; }
             set 
@@ -123,12 +146,12 @@ namespace WpfApp4.ViewModel
 
         private void AddOption()
         {
-            Options.Add(Option);
-            Option = "";
+            Options.Add(new Option(this.OptionName));
+            OptionName = "";
         }
         private bool CanAddOption()
         {
-            if(!string.IsNullOrWhiteSpace(Option))
+            if(!string.IsNullOrWhiteSpace(OptionName))
             {
                 return true;
             }
@@ -139,7 +162,6 @@ namespace WpfApp4.ViewModel
         {
             Options.Remove(SelectedOption);
         }
-
         private bool CanRemoveOption()
         {
             if(SelectedOption != null)
@@ -148,5 +170,21 @@ namespace WpfApp4.ViewModel
             }
             return false;
         }
+
+        private void SearchContacts()
+        {
+            if (string.IsNullOrEmpty(SearchedContact))
+            {
+                ShownContacts = Contacts;
+            }
+            else
+            {
+                ShownContacts = new ObservableCollection<Contact>(
+                    Contacts.Where(c => c.Name.Contains(SearchedContact))
+                    
+                ) ;
+            }
+        }
+
     }
 }

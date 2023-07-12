@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp4.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Phonebook" Height="570" Width="750">
     <Grid>
@@ -18,24 +19,30 @@
         <!--Search-->
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
             <TextBlock Text="Type to Search:" VerticalAlignment="Center"/>
-            <TextBox Width="150" Margin="5" Text="{Binding SearchedContact, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Name="btnSearch" Command="{Binding SearchCommand}" Content="Search" Width="50" Margin="5"/>
+            <TextBox Width="150" Margin="5" Text="{Binding SearchedContact, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
 
         <!--Contacts-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".3*" MaxWidth="250"/>
-                <ColumnDefinition Width=".7*"/>
+                <ColumnDefinition Width=".25*" MaxWidth="250"/>
+                <ColumnDefinition Width=".75*"/>
             </Grid.ColumnDefinitions>
 
             <DataGrid Grid.Column="1" Margin="0,0,10,0"
-                ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}"
+                ItemsSource="{Binding ShownContacts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedContact}"
                 CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width=".3*"/>
-                    <DataGridTextColumn Header="Number" Binding="{Binding Number}" Width=".35*"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width=".35*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width=".2*"/>
+                    <DataGridTextColumn Header="Number" Binding="{Binding Number}" Width=".2*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width=".3*"/>
+                    <DataGridTextColumn Header="Additional Info" Binding="{Binding Email}" Width=".3*"/>
                 </DataGrid.Columns>
 
             </DataGrid>
@@ -61,21 +68,29 @@
         <Grid Grid.Row="3">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".3*"  MaxWidth="250"/>
-                <ColumnDefinition Width=".7*"/>
+                <ColumnDefinition Width=".25*" MaxWidth="200"/>
+                <ColumnDefinition Width=".25*" MaxWidth="200"/>
+                <ColumnDefinition Width=".6*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="1">
                 <TextBlock Text="Option" Margin="10,0,0,0"/>
-                <TextBox Margin="10,0,10,15" Text="{Binding Option, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Margin="10,0,10,15" Text="{Binding OptionName, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Button x:Name="btnAddOption" Content="Add Option" Command="{Binding AddOptionCommand}" Height="30" Margin="10,10,10,0"/>
                 <Button x:Name="btnRemoveOption" Content="Remove Option" Command="{Binding RemoveOptionCommand}" Height="30" Margin="10,10,10,0"/>
                 <TextBlock Text="{Binding SelectedContact.Id}" Width="50"/>
             </StackPanel>
 
-            <ListView Grid.Column="1" Margin="0,0,10,0" ItemsSource="{Binding Options, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOption}"/>
-
+            <ListView Grid.Column="2" Margin="0,0,10,0"
+                      ItemsSource="{Binding Options, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedOption}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
         </Grid>
 

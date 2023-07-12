@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "zv194FJAgLWL1SR9kvVfpwX/JPpBbTJfr5zYOmUCxvXhWRb4vY3Hz6L8PMhH5M5gviE2e2KMeN6YaV6TX7LnMQ==",
+  "dgSpecHash": "i0thxppEuWeCB617z07PA2hUIEbxdHWYRDBLiUdf08SGKun8W2KiWIT4ECNS5OYJAmD/7Nil2O/ocQGPAkVBpA==",
   "success": true,
   "projectFilePath": "C:\\Users\\VSC2_\\Source\\Repos\\bogoNBG\\Real-Telefonen-ukazatel\\WpfApp4\\WpfApp4\\WpfApp4.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\VSC2_\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
   "logs": []
 }

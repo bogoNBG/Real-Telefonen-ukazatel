@@ -12,5 +12,14 @@ namespace WpfApp4.Model
         public int ContactId { get; set; }
         public int OptionId { get; set; }
         public string Name { get; set; }
+
+        public Link(int contactId, int optionId, string name)
+        {
+            this.Id = IdGenerator.GetNextId<Link>();
+            this.ContactId = contactId;
+            this.OptionId = optionId;
+            this.Name = name;
+        }
+
     }
 }
