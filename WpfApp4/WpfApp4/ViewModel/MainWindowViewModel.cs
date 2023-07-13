@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace WpfApp4.ViewModel
         public RelayCommand RemoveContactCommand => new(execution => RemoveContact(), canExecute => CanRemoveContact());
         public RelayCommand AddOptionCommand => new(execution => AddOption(), canExecute => CanAddOption());
         public RelayCommand RemoveOptionCommand => new(execution => RemoveOption(), canExecute => CanRemoveOption());
+        public RelayCommand AddLinkCommand => new(execution => AddLink(), canExecute => CanAddLink());
         public RelayCommand SearchCommand => new(execution => SearchContacts());
 
         private string name;
@@ -68,6 +70,17 @@ namespace WpfApp4.ViewModel
             }
         }
 
+        private string linkName;
+        public string LinkName
+        {
+            get { return linkName; }
+            set 
+            { 
+                linkName = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string searchedContact;
         public string SearchedContact
         {
@@ -91,8 +104,8 @@ namespace WpfApp4.ViewModel
         }
 
 
-        private Contact? selectedContact;
-        public Contact? SelectedContact
+        private Contact selectedContact;
+        public Contact SelectedContact
 		{
 			get { return selectedContact; }
 			set
@@ -186,5 +199,21 @@ namespace WpfApp4.ViewModel
             }
         }
 
+        private void AddLink()
+        {
+            //LinkName e stoinosta na linka, pr: bate ivko
+            SelectedContact.Links.Add(new Link(SelectedOption.Id,LinkName));
+            LinkName = "";
+        }
+        private bool CanAddLink()
+        {
+            if(SelectedContact != null && SelectedOption != null && !string.IsNullOrWhiteSpace(LinkName))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        
     }
 }

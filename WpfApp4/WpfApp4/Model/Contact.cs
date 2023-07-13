@@ -12,6 +12,7 @@ namespace WpfApp4.Model
         public string Name { get; set; }
         public string Number { get; set; }
         public string Email { get; set; }
+        public List<Link> Links { get; set; }
 
         public Contact(string name, string number, string email)
         {
@@ -19,6 +20,7 @@ namespace WpfApp4.Model
             this.Name = name;
             this.Number = number;
             this.Email = email;
+            Links = new List<Link>();
         }
 
     }
