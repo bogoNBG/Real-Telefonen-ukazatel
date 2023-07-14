@@ -64,3 +64,5 @@ C:\Users\VSC2_\Source\Repos\bogoNBG\Real-Telefonen-ukazatel\WpfApp4\WpfApp4\obj\
 C:\Users\VSC2_\Source\Repos\bogoNBG\Real-Telefonen-ukazatel\WpfApp4\WpfApp4\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
 C:\Users\VSC2_\Source\Repos\bogoNBG\Real-Telefonen-ukazatel\WpfApp4\WpfApp4\obj\Debug\net6.0-windows\WpfApp4.csproj.CopyComplete
 C:\Users\VSC2_\Source\Repos\bogoNBG\Real-Telefonen-ukazatel\WpfApp4\WpfApp4\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\VSC2_\Source\Repos\bogoNBG\Real-Telefonen-ukazatel\WpfApp4\WpfApp4\obj\Debug\net6.0-windows\View\UpdatedView.g.cs
+C:\Users\VSC2_\Source\Repos\bogoNBG\Real-Telefonen-ukazatel\WpfApp4\WpfApp4\obj\Debug\net6.0-windows\View\UpdatedView.baml

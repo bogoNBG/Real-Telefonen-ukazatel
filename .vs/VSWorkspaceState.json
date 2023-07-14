@@ -3,8 +3,9 @@
     "",
     "\\WpfApp4",
     "\\WpfApp4\\WpfApp4",
+    "\\WpfApp4\\WpfApp4\\View",
     "\\WpfApp4\\WpfApp4\\ViewModel"
   ],
-  "SelectedNode": "\\WpfApp4\\WpfApp4\\ViewModel\\MainWindowViewModel.cs",
+  "SelectedNode": "\\WpfApp4\\WpfApp4.sln",
   "PreviewInSolutionExplorer": false
 }

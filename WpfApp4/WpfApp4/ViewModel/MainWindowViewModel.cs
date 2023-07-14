@@ -5,6 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using WpfApp4.Model;
 using WpfApp4.MVVM;
+using System.Windows;
 
 namespace WpfApp4.ViewModel
 {
@@ -15,6 +16,7 @@ namespace WpfApp4.ViewModel
             Contacts = new ObservableCollection<Contact>();
             ShownContacts = Contacts;
             Options = new ObservableCollection<Option>();
+            
         }
         public ObservableCollection<Contact> Contacts { get; set; }
         public ObservableCollection<Option> Options { get; set; }
@@ -204,6 +206,8 @@ namespace WpfApp4.ViewModel
             //LinkName e stoinosta na linka, pr: bate ivko
             SelectedContact.Links.Add(new Link(SelectedOption.Id,LinkName));
             LinkName = "";
+            SelectedContact = null;
+            
         }
         private bool CanAddLink()
         {
