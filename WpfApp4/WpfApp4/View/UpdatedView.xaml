@@ -98,7 +98,6 @@
             <TextBlock Grid.Column="1" Text="Links" Margin="10,0,0,5"/>
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <TextBlock Text="Links" Margin="10,0,0,5"/>
                     <ItemsControl ItemsSource="{Binding SelectedContact.Links, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,15">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
