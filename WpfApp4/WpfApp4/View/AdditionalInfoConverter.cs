@@ -29,13 +29,6 @@ namespace WpfApp4.View
                         }
                     }
                 }
-                //string names = string.Empty;
-                //foreach (Link link in links)
-                //{
-                //    names += $"{link.OptionId}: {link.Name}\n";
-                //}
-                //return values[1] + names;
-                //return values[1];
                 return output;
             }
             return "ne e";

@@ -3,13 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp4.MVVM;
+
 
 namespace WpfApp4.Model
 {
-    internal class Contact
+    internal class Contact : ViewModelBase
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (name != value)
+                {
+                    name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
         public string Number { get; set; }
         public string Email { get; set; }
         public List<Link> Links { get; set; }

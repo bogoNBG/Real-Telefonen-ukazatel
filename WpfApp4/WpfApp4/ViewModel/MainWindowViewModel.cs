@@ -16,8 +16,11 @@ namespace WpfApp4.ViewModel
             Contacts = new ObservableCollection<Contact>();
             ShownContacts = Contacts;
             Options = new ObservableCollection<Option>();
-            
+            Placeholder = "Search";
         }
+
+       
+
         public ObservableCollection<Contact> Contacts { get; set; }
         public ObservableCollection<Option> Options { get; set; }
 
@@ -27,6 +30,7 @@ namespace WpfApp4.ViewModel
         public RelayCommand RemoveOptionCommand => new(execution => RemoveOption(), canExecute => CanRemoveOption());
         public RelayCommand AddLinkCommand => new(execution => AddLink(), canExecute => CanAddLink());
         public RelayCommand SearchCommand => new(execution => SearchContacts());
+        public RelayCommand SaveContactCommand => new(execution => SaveContact(), canExecute => CanSaveContact());
 
         private string name;
         public string Name
@@ -113,6 +117,13 @@ namespace WpfApp4.ViewModel
 			set
             {
                 selectedContact = value;
+                if(SelectedContact != null) 
+                {
+                    Name = SelectedContact.Name;
+                    Number = SelectedContact.Number;
+                    Email = SelectedContact.Email;
+                }
+                
                 OnPropertyChanged();
             }
 		}
@@ -150,6 +161,10 @@ namespace WpfApp4.ViewModel
         private void RemoveContact()
         {
             Contacts.Remove(SelectedContact);
+
+            Name = "";
+            Number = "";
+            Email = "";
         }
         private bool CanRemoveContact()
         {
@@ -194,8 +209,8 @@ namespace WpfApp4.ViewModel
             }
             else
             {
-                ShownContacts = new ObservableCollection<Contact>(
-                    Contacts.Where(c => c.Name.Contains(SearchedContact))
+                ShownContacts = new ObservableCollection<Contact>
+                    (Contacts.Where(c => c.Name.Contains(SearchedContact))
                     
                 ) ;
             }
@@ -218,6 +233,64 @@ namespace WpfApp4.ViewModel
             return false;
         }
 
-        
+        private void SaveContact()
+        {
+            SelectedContact.Name = Name;
+            SelectedContact.Number = Number;
+            SelectedContact.Email = Email;
+
+            OnPropertyChanged(SelectedContact.Name);
+
+            SelectedContact = null;
+
+            
+
+            Name = "";
+            Number = "";
+            Email = "";
+        }
+        private bool CanSaveContact()
+        {
+            if (SelectedContact != null) return true;
+            else return false;
+        }
+
+
+        //Search...
+
+        public RelayCommand ClearTextCommand => new(execution => ClearText());
+        public RelayCommand IsSearchEmptyCommand => new(execution => IsEmpty());
+
+        private string placeholder;
+
+        public string Placeholder
+        {
+            get { return placeholder; }
+            set
+            {
+                placeholder = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void ClearText()
+        {
+            SearchedContact = string.Empty;
+        }
+
+        public void IsEmpty()
+        {
+            if (string.IsNullOrWhiteSpace(SearchedContact))
+            {
+                Placeholder = "Search";
+            }
+            else
+            {
+                Placeholder = string.Empty;
+            }
+        }
+
+        //...
+
     }
 }

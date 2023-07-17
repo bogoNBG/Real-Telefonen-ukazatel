@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp4.ViewModel;
 
 namespace WpfApp4.View
 {
@@ -22,6 +23,8 @@ namespace WpfApp4.View
         public UpdatedView()
         {
             InitializeComponent();
+            MainWindowViewModel viewModel = new MainWindowViewModel();
+            DataContext = viewModel;
         }
     }
 }
