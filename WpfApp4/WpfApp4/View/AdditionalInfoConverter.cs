@@ -15,23 +15,16 @@ namespace WpfApp4.View
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values[0] is List<Link> links && values[1] is ObservableCollection<Option> options)
+            if (values[0] is int optionId && values[1] is ObservableCollection<Option> options)
             {
-                string output = string.Empty;
-                foreach(Option option in options)
+                var option = options.FirstOrDefault(o => o.Id == optionId);
+                if (option != null)
                 {
-                    output += $"{option.Name}:\n";
-                    foreach(Link link in links)
-                    {
-                        if (option.Id == link.OptionId)
-                        {
-                            output += $"{link.Name}\n";
-                        }
-                    }
+                    return option.Name;
                 }
-                return output;
             }
-            return "ne e";
+            return "Unknown Option";
+
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

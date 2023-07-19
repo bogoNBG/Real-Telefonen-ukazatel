@@ -13,18 +13,7 @@ namespace WpfApp4.Model
         public int Id { get; set; }
 
         private string name;
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                if (name != value)
-                {
-                    name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
+        public string Name { get; set; }       
         public string Number { get; set; }
         public string Email { get; set; }
         public List<Link> Links { get; set; }

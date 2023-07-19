@@ -21,9 +21,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height=".50*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height=".50*"/>
+            <RowDefinition Height=".60*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height=".40*" MaxHeight="300"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
@@ -35,7 +35,8 @@
 
         <GridSplitter Grid.Column="1" Grid.RowSpan="5" HorizontalAlignment="Stretch"/>
 
-        <StackPanel Grid.RowSpan="5">
+        
+        <Grid Grid.RowSpan="4">
             <!--Search-->
             <Grid Background="White" >
                 <TextBox Name="txtInput" VerticalContentAlignment="Center" BorderThickness="0"
@@ -58,18 +59,19 @@
             </Grid>
 
             <!--Data grid with contacts-->
-            <DataGrid Grid.RowSpan="5"
+            <ScrollViewer Grid.RowSpan="5" VerticalScrollBarVisibility="Auto">
+                <DataGrid
           ItemsSource="{Binding ShownContacts}" 
           SelectedItem="{Binding SelectedContact}"
           CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+        </ScrollViewer>
+        </Grid>
+ 
 
-        </StackPanel>
-
-        
 
         <!--Add Contacts and their Links-->
         <Grid Grid.Row="1" Grid.Column="2">
@@ -96,26 +98,34 @@
             </StackPanel>
 
             <TextBlock Grid.Column="1" Text="Links" Margin="10,0,0,5"/>
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <ItemsControl ItemsSource="{Binding SelectedContact.Links, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,15">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,5">
-                                    <TextBlock Text="{Binding OptionId}" FontWeight="Bold"/>
-                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="0,20,10,20">
+                <ItemsControl ItemsSource="{Binding SelectedContact.Links, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,15">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,5">
+                                <TextBlock FontWeight="Bold">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource AdditionalInfoConverter}">
+                                            <Binding Path="OptionId" />
+                                            <Binding Path="DataContext.Options" RelativeSource="{RelativeSource AncestorType={x:Type Window}}" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
 
         </Grid>
 
+        <Rectangle Grid.Row="2" Grid.Column="2" Fill="LightGray" />
+
         <Grid Grid.Row="3" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".33*" />
+                <ColumnDefinition Width="4" />
                 <ColumnDefinition Width=".33*"/>
             </Grid.ColumnDefinitions>
 
@@ -126,10 +136,11 @@
                 <TextBlock Text="Link" Margin="10,0,0,0"/>
                 <TextBox Margin="10,0,10,15" Text="{Binding LinkName, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button x:Name="btnAddLink" Content="Add Link" Command="{Binding AddLinkCommand}" Height="30" Margin="10,10,10,0"/>
-                <Button x:Name="btnRemoveLink" Content="Remove Link" Command="{Binding RemoveLinkCommand}" Height="30" Margin="10,10,10,0"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
+            <Rectangle Grid.Column="1" Fill="LightGray"/>
+
+            <StackPanel Grid.Column="2">
                 <TextBlock Text="Option" Margin="10,0,0,0"/>
                 <TextBox Margin="10,0,10,15" Text="{Binding OptionName, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -140,23 +151,7 @@
 
         </Grid>
 
-        <!--           
-            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    <TextBlock Text="Links" Margin="10,0,0,5"/>
-                    <ItemsControl ItemsSource="{Binding SelectedContact.Links, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,15">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,5">
-                                    <TextBlock Text="{Binding OptionId}" FontWeight="Bold"/>
-                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>-->
+        <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="LightGray" />
 
     </Grid>
 </Window>

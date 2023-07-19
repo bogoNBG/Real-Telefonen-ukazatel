@@ -13,15 +13,21 @@ namespace WpfApp4.ViewModel
     {
         public MainWindowViewModel()
         {
-            Contacts = new ObservableCollection<Contact>();
+            Contacts = new ObservableCollection<ContactViewModel>();
             ShownContacts = Contacts;
             Options = new ObservableCollection<Option>();
             Placeholder = "Search";
+
+            Contacts.Add(new ContactViewModel(new Contact("Ime", "Nomer", "ImeNomer@email.com")));
+            Contacts.Add(new ContactViewModel(new Contact("Ivan", "0879356194", "ivanivanov@email.com")));
+            Contacts.Add(new ContactViewModel(new Contact("Kaloqn", "02747893", "kaloqnsofiq@abv.bg")));
+            Options.Add(new Option("Facebook"));
+            Options.Add(new Option("Instagram"));
         }
 
        
 
-        public ObservableCollection<Contact> Contacts { get; set; }
+        public ObservableCollection<ContactViewModel> Contacts { get; set; }
         public ObservableCollection<Option> Options { get; set; }
 
         public RelayCommand AddContactCommand => new(execution => AddContact(), canExecute => CanAddContact());
@@ -98,8 +104,8 @@ namespace WpfApp4.ViewModel
             }
         }
 
-        private ObservableCollection<Contact> shownContacts;
-        public ObservableCollection<Contact> ShownContacts
+        private ObservableCollection<ContactViewModel> shownContacts;
+        public ObservableCollection<ContactViewModel> ShownContacts
         {
             get { return shownContacts; }
             set
@@ -110,8 +116,8 @@ namespace WpfApp4.ViewModel
         }
 
 
-        private Contact selectedContact;
-        public Contact SelectedContact
+        private ContactViewModel selectedContact;
+        public ContactViewModel SelectedContact
 		{
 			get { return selectedContact; }
 			set
@@ -142,7 +148,7 @@ namespace WpfApp4.ViewModel
 
         private void AddContact()
         {
-            Contacts.Add(new Contact(this.Name,this.Number,this.Email));
+            Contacts.Add(new ContactViewModel(new Contact(this.Name,this.Number,this.Email)));
 
             Name = "";
             Number = "";
@@ -190,9 +196,26 @@ namespace WpfApp4.ViewModel
 
         private void RemoveOption()
         {
+            var contactsCopy = new List<ContactViewModel>(Contacts);
+            foreach (ContactViewModel contact in contactsCopy)
+            {
+                var newLinks = new List<Link>(contact.Links);
+
+                foreach (Link link in contact.Links)
+                {
+                    if (link.OptionId == SelectedOption.Id)
+                    {
+                        newLinks.Remove(link);
+                    }
+                }
+
+                contact.Links = newLinks;
+            }
+
             Options.Remove(SelectedOption);
         }
-        private bool CanRemoveOption()
+
+            private bool CanRemoveOption()
         {
             if(SelectedOption != null)
             {
@@ -209,7 +232,7 @@ namespace WpfApp4.ViewModel
             }
             else
             {
-                ShownContacts = new ObservableCollection<Contact>
+                ShownContacts = new ObservableCollection<ContactViewModel>
                     (Contacts.Where(c => c.Name.Contains(SearchedContact))
                     
                 ) ;
@@ -218,10 +241,8 @@ namespace WpfApp4.ViewModel
 
         private void AddLink()
         {
-            //LinkName e stoinosta na linka, pr: bate ivko
             SelectedContact.Links.Add(new Link(SelectedOption.Id,LinkName));
             LinkName = "";
-            SelectedContact = null;
             
         }
         private bool CanAddLink()
@@ -239,11 +260,9 @@ namespace WpfApp4.ViewModel
             SelectedContact.Number = Number;
             SelectedContact.Email = Email;
 
-            OnPropertyChanged(SelectedContact.Name);
+            SelectedContact.Links.RemoveAll(link => link.Name == "");
 
             SelectedContact = null;
-
-            
 
             Name = "";
             Number = "";
